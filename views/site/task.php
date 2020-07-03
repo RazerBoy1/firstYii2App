@@ -9,9 +9,9 @@ use app\models\Task;
 
 $tasksDataProvider = new ActiveDataProvider([
     'query' => Task::find(),
-    'pagination' => [
+    /*'pagination' => [
         'pageSize' => 2,
-    ],
+    ],*/
 ]);
 
 $this->title = 'Tasks';

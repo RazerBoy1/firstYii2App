@@ -9,9 +9,9 @@ use app\models\Project;
 
 $projectsDataProvider = new ActiveDataProvider([
     'query' => Project::find(),
-    'pagination' => [
+    /*'pagination' => [
         'pageSize' => 2,
-    ],
+    ],*/
 ]);
 
 $this->title = 'Projects';

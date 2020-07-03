@@ -3,9 +3,7 @@
     /* @var $content string */
 
     use kartik\sidenav\SideNav;
-    use app\widgets\Alert;
     use yii\helpers\Html;
-    use yii\bootstrap\Nav;
     use yii\bootstrap\NavBar;
     use yii\widgets\Breadcrumbs;
     use app\assets\AppAsset;
@@ -52,9 +50,6 @@
                     [
                         'type' => SideNav::TYPE_PRIMARY,
                         'items' => [
-                            ['label' => 'Home', 'url' => ['/site/index']],
-                            ['label' => 'About', 'url' => ['/site/about']],
-                            ['label' => 'Contact', 'url' => ['/site/contact']],
                             ['label' => 'Project', 'url' => ['/site/project']],
                             ['label' => 'Report', 'url' => ['/site/report']],
                             ['label' => 'Task', 'url' => ['/site/task']],

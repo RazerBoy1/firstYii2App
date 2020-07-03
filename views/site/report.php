@@ -11,9 +11,9 @@ use app\models\Report;
 
 $reportsDataProvider = new ActiveDataProvider([
     'query' => Report::find(),
-    'pagination' => [
+    /*'pagination' => [
         'pageSize' => 2,
-    ],
+    ],*/
 ]);
 
 $this->title = 'Reports';
