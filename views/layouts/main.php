@@ -24,13 +24,12 @@
     </head>
 
     <body>
-
     <?php $this->beginBody() ?>
 
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My First Yii App',
+                'brandLabel' => Yii::t('app', 'My First Yii App'),
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -50,15 +49,15 @@
                     [
                         'type' => SideNav::TYPE_PRIMARY,
                         'items' => [
-                            ['label' => 'Project', 'url' => ['/site/project']],
-                            ['label' => 'Report', 'url' => ['/site/report']],
-                            ['label' => 'Task', 'url' => ['/site/task']],
+                            ['label' => Yii::t('app', 'Projects'), 'url' => ['/site/project']],
+                            ['label' => Yii::t('app', 'Tasks'), 'url' => ['/site/task']],
+                            ['label' => Yii::t('app', 'Reports'), 'url' => ['/site/report']],
                         ]
                     ]);
                 ?>
             </div>
 
-            <div class='col-lg-9' >
+            <div class='col-lg-9'>
                 <?= $content ?>
             </div>
         </div>

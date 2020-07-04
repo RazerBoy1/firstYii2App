@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tom_report".
@@ -14,19 +15,13 @@ use Yii;
  *
  * @property TomTask $task
  */
-class Report extends \yii\db\ActiveRecord
+class Report extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'tom_report';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -37,24 +32,16 @@ class Report extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'task_id' => 'Task ID',
-            'name' => 'Name',
-            'percent_done' => 'Percent Done',
+            'id' => Yii::t('app', 'ID'),
+            'task_id' => Yii::t('app', 'Task ID'),
+            'name' => Yii::t('app', 'Name'),
+            'percent_done' => Yii::t('app', 'Percent Done'),
         ];
     }
 
-    /**
-     * Gets query for [[Task]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getTask()
     {
         return $this->hasOne(TomTask::className(), ['id' => 'task_id']);

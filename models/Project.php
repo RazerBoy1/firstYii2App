@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tom_project".
@@ -12,42 +13,31 @@ use Yii;
  *
  * @property TomTask[] $tomTasks
  */
-class Project extends \yii\db\ActiveRecord
+class Project extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $percent_done;
+
     public static function tableName()
     {
         return 'tom_project';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
-            [['name'], 'string'],
+            [['name', 'percent_done'], 'string'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'percent_done' => Yii::t('app', 'Percent Done'),
         ];
     }
 
-    /**
-     * Gets query for [[TomTasks]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getTomTasks()
     {
         return $this->hasMany(TomTask::className(), ['project_id' => 'id']);

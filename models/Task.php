@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tom_task".
@@ -16,59 +17,43 @@ use Yii;
  * @property TomReport[] $tomReports
  * @property TomProject $project
  */
-class Task extends \yii\db\ActiveRecord
+class Task extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $percent_done;
+
     public static function tableName()
     {
         return 'tom_task';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             [['project_id', 'name'], 'required'],
             [['project_id'], 'integer'],
-            [['name'], 'string'],
+            [['name', 'percent_done'], 'string'],
             [['start_date', 'end_date'], 'safe'],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => TomProject::className(), 'targetAttribute' => ['project_id' => 'id']],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'project_id' => 'Project ID',
-            'name' => 'Name',
-            'start_date' => 'Start Date',
-            'end_date' => 'End Date',
+            'id' => Yii::t('app', 'ID'),
+            'project_id' => Yii::t('app', 'Project ID'),
+            'name' => Yii::t('app', 'Name'),
+            'start_date' => Yii::t('app', 'Start Date'),
+            'end_date' => Yii::t('app', 'End Date'),
+            'percent_done' => Yii::t('app', 'Percent Done'),
         ];
     }
 
-    /**
-     * Gets query for [[TomReports]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getTomReports()
     {
         return $this->hasMany(TomReport::className(), ['task_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Project]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getProject()
     {
         return $this->hasOne(TomProject::className(), ['id' => 'project_id']);
