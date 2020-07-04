@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => static function ($data) {
                     return Progress::widget(
                         [
-                            'percent' => (float)$data['percent_done'],
+                            'percent' => $data['percent_done'],
                             'options' => ['class' => 'progress-success'],
                         ]
                     );

@@ -31,7 +31,7 @@ class Task extends ActiveRecord
         return [
             [['project_id', 'name'], 'required'],
             [['project_id'], 'integer'],
-            [['name', 'percent_done'], 'string'],
+            [['name'], 'string'],
             [['start_date', 'end_date'], 'safe'],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => TomProject::className(), 'targetAttribute' => ['project_id' => 'id']],
         ];

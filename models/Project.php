@@ -25,7 +25,7 @@ class Project extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'percent_done'], 'string'],
+            [['name'], 'string'],
         ];
     }
 
