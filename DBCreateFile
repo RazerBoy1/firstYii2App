@@ -1,0 +1,158 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 05, 2020 at 05:20 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `tom`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tom_project`
+--
+
+CREATE TABLE `tom_project` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tom_project`
+--
+
+INSERT INTO `tom_project` (`id`, `name`) VALUES
+(1, 'Projekt 1'),
+(2, 'Projekt 2'),
+(3, 'Projekt 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tom_report`
+--
+
+CREATE TABLE `tom_report` (
+  `id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `percent_done` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tom_report`
+--
+
+INSERT INTO `tom_report` (`id`, `task_id`, `name`, `percent_done`) VALUES
+(1, 1, 'Porocilo 1', 100),
+(2, 2, 'Porocilo 2', 30),
+(3, 2, 'Porocilo 3', 20),
+(4, 5, 'Porocilo 1', 100),
+(5, 4, 'Porocilo 1', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tom_task`
+--
+
+CREATE TABLE `tom_task` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `start_date` timestamp NULL DEFAULT NULL,
+  `end_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tom_task`
+--
+
+INSERT INTO `tom_task` (`id`, `project_id`, `name`, `start_date`, `end_date`) VALUES
+(1, 1, 'Naloga 1', '2014-05-22 22:00:00', '2014-05-25 21:00:00'),
+(2, 1, 'Naloga 2', '2014-05-22 22:00:00', '2014-06-23 21:00:00'),
+(3, 1, 'Naloga 3', '2014-05-22 22:00:00', '2014-05-26 21:00:00'),
+(4, 2, 'Naloga 1', '2014-05-22 22:00:00', '2014-06-23 21:00:00'),
+(5, 3, 'Naloga 1', '2014-05-22 22:00:00', '2014-05-23 21:00:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tom_project`
+--
+ALTER TABLE `tom_project`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tom_report`
+--
+ALTER TABLE `tom_report`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `task_id` (`task_id`);
+
+--
+-- Indexes for table `tom_task`
+--
+ALTER TABLE `tom_task`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `project_id` (`project_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tom_project`
+--
+ALTER TABLE `tom_project`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tom_report`
+--
+ALTER TABLE `tom_report`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tom_task`
+--
+ALTER TABLE `tom_task`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tom_report`
+--
+ALTER TABLE `tom_report`
+  ADD CONSTRAINT `tom_report__task_id__tom_task` FOREIGN KEY (`task_id`) REFERENCES `tom_task` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tom_task`
+--
+ALTER TABLE `tom_task`
+  ADD CONSTRAINT `tom_task__project_id__tom_project` FOREIGN KEY (`project_id`) REFERENCES `tom_project` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
